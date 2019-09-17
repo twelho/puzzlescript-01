@@ -10,6 +10,7 @@ Mekaniikka:
 - Tikkaita voi kiivetä vain ilman laatikkoa
 - Portaaleissa voi kuljettaa vain laatikoita
 - Ovi aukeaa kun kaikki nappulat on aktivoitu
+- Putoava laatikko liiskaa pelaajan
 
 Objektit:
 - Tikkaat
@@ -17,6 +18,8 @@ Objektit:
 - Nappula
 - Pelaaja (kahden ruudun korkuinen) - Benjamin
 - Laatikko (yksi ruutu)
+- Platformit
+- Reunat
 
 Tasot:
 - Tasoja: 3
