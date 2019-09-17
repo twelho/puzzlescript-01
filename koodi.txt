@@ -19,7 +19,15 @@ Player
 Blue   
 
 Crate 
-Orange 
+Orange
+
+Platform
+Lightgray
+00000
+00000
+.....
+.....
+.....
 
 =======
 LEGEND
@@ -31,6 +39,7 @@ P = Player
 * = Crate
 @ = Crate and Target
 O = Target
+q = Platform
 
 =======
 SOUNDS
@@ -42,7 +51,7 @@ COLLISIONLAYERS
 
 Background
 Target
-Player, Wall, Crate
+Player, Platform, Wall, Crate
 
 ======
 RULES     
@@ -63,7 +72,7 @@ LEVELS
 #########################
 #.......................#
 #.......................*
-#.......................*
+#........qqqqqq.........*
 #.......................#
 #.......................#
 #.......................#
