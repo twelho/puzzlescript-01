@@ -19,7 +19,12 @@ Player
 Blue   
 
 Crate 
-Orange
+Brown darkbrown
+11111
+11001
+10101
+10011
+11111
 
 Platform
 Lightgray
