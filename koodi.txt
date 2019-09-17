@@ -2,6 +2,11 @@ title My Game
 author My Name Here
 homepage www.puzzlescript.net
 
+(realtime_interval specifies the "speed" of gravity (seconds per block of movement))
+realtime_interval 0.1
+throttle_movement
+noaction
+
 ========
 OBJECTS
 ========
@@ -15,8 +20,11 @@ DarkBlue
 Wall 
 BROWN
 
-Player 
-Blue   
+CharTop
+Yellow
+
+Char
+Blue
 
 Crate 
 Brown darkbrown
@@ -50,13 +58,27 @@ Red
 .....
 .000.
 
+(Meta-objects, no need to touch these)
+Player
+transparent
+
+Fell
+transparent
+
 =======
 LEGEND
 =======
 
+CharFull = Char or CharTop
+GravityAffects = Char or Crate
+Collidable = Platform or Wall or Crate or CharFull or Ladder
+Grabbable = Ladder
+
+a = Player
 . = Background
 # = Wall
-P = Player
+T = CharTop
+P = Char
 * = Crate
 @ = Crate and Target
 O = Target
@@ -74,32 +96,50 @@ COLLISIONLAYERS
 
 Background
 Target, Ladder, Button
-Player, Platform, Wall, Crate
+Char, CharTop, Platform, Wall, Crate
+Fell
+Player
 
 ======
 RULES     
-======     
+======
 
-[ >  Player | Crate ] -> [  >  Player | > Crate  ]     
+(On real-time ticks update gravity for all affected objects)
+down [ stationary Player ] [ GravityAffects no Fell | no Collidable ] -> [ Player ] [ DOWN GravityAffects Fell | ]
+[ Fell ] -> []
+
+(Disable moving down if the object below is not Grabbable)
+up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
+
+(Disable moving up if not grabbing onto something)
+[ UP Player ] [ No Grabbable Char ] -> [ Player ] [ Char ]
+
+(Transfer player movement to the Character, perform rigid animation for the top)
+[ moving Player ] [ Char ] -> [ Player ] [ moving Char ]
++ rigid [ moving Char | CharTop ] -> [ moving Char | moving CharTop ]
+
+(Allow the Character and other Crates to push Crates)
+[ > CharFull | Crate ] -> [ > CharFull | > Crate ]
+[ > Crate | Crate ] -> [ > Crate | > Crate ]
 
 ==============
 WINCONDITIONS
 ==============
 
-All Target on Crate     
+All Target on Crate  
 
 =======     
 LEVELS
 =======
 
 #########################
-#.......................#
-#.......................*
+#a......................#
+#.................O.@.@.*
 #.......lqqqqqq.........*
 #.......l...............#
-#.......l...............#
-#.......l...............#
-#.......l...............#
+#....T..l...............#
+#....P..l...............#
+#.......l.@...qqqq......#
 #.......l.@.b...........#
 #...#####################
 #...#########........####
