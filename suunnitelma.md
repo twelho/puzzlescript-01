@@ -15,7 +15,7 @@ Objektit:
 - Tikkaat
 - Portaalit
 - Nappula
-- Pelaaja (kahden ruudun korkuinen)
+- Pelaaja (kahden ruudun korkuinen) - Benjamin
 - Laatikko (yksi ruutu)
 
 Tasot:
