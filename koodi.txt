@@ -32,7 +32,7 @@ BROWN DARKBROWN
 00010
 
 Player
-Black Orange White Blue
+Black Red White Blue
 .000.
 .111.
 22222
