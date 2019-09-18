@@ -59,7 +59,7 @@ Red
 .000.
 
 Spikes
-White
+Black
 .....
 .....
 .0.0.
@@ -73,6 +73,17 @@ transparent
 
 Fell
 transparent
+
+RedDoorClosed
+Red
+
+RedDoorOpen
+Red
+0....
+.0...
+..0..
+...0.
+....0
 
 =======
 LEGEND
@@ -95,6 +106,7 @@ q = Platform
 b = Button
 l = Ladder
 s = Spikes
+r = RedDoorClosed
 
 =======
 SOUNDS
@@ -105,8 +117,8 @@ COLLISIONLAYERS
 ================
 
 Background
-Target, Ladder, Button, Spikes
-Char, CharTop, Platform, Wall, Crate
+Target, Ladder, Button, RedDoorOpen, Spikes
+Char, CharTop, Platform, Wall, Crate, RedDoorClosed
 Fell
 Player
 
@@ -135,6 +147,10 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 (Spikes)
 [ > CharFull | Spikes ] -> [ | Spikes]
 
+(Red Button and Red Doors)
+[Button Crate] [RedDoorClosed] -> [Button Crate] [RedDoorOpen] 
+[Button no Crate] [RedDoorOpen] -> [Button no Crate] [RedDoorClosed] 
+
 ==============
 WINCONDITIONS
 ==============
@@ -147,15 +163,15 @@ LEVELS
 
 #########################
 #a......................#
-#.................O.@.@.*
-#.......lqqqqqq.........*
-#.......l...............#
-#....T..l...............#
-#....P..l...............#
-#.......l.@...qqqq......#
-#...s...l.@.b.....ss....#
-#...#####################
-#...#########........####
+#.....s.....*.........*.*
+#.....qqlqqqqqq.........*
+#..ql...l...........r...#
+#...lT..l.........O.r...#
+#...lP..l.....qqqql.r...#
+#...l...l.*.......l.r...#
+#.b*l...l.*.b.....l.r...#
+###########.#############
+#...#######b#........####
 #...#########...........#
 #...#########...........#
 #...#########...........#
