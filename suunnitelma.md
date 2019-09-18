@@ -14,9 +14,9 @@ Mekaniikka:
 
 Objektit:
 - Tikkaat
-- Portaalit
+- Portaalit - Benjamin
 - Nappula
-- Pelaaja (kahden ruudun korkuinen) - Benjamin
+- Pelaaja (kahden ruudun korkuinen) - Dennis
 - Laatikko (yksi ruutu)
 - Platformit
 - Reunat
