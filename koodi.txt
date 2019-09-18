@@ -85,6 +85,14 @@ Red
 ...0.
 ....0
 
+GoalFlag
+Blue White
+100..
+10000
+100..
+1....
+1....
+
 =======
 LEGEND
 =======
@@ -107,6 +115,7 @@ b = Button
 l = Ladder
 s = Spikes
 r = RedDoorClosed
+g = GoalFlag
 
 =======
 SOUNDS
@@ -117,7 +126,7 @@ COLLISIONLAYERS
 ================
 
 Background
-Target, Ladder, Button, RedDoorOpen, Spikes
+Target, Ladder, Button, RedDoorOpen, Spikes, GoalFlag
 Char, CharTop, Platform, Wall, Crate, RedDoorClosed
 Fell
 Player
@@ -155,7 +164,7 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 WINCONDITIONS
 ==============
 
-All Button on Crate  
+Any CharFull on GoalFlag
 
 =======     
 LEVELS
