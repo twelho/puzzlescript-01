@@ -58,6 +58,15 @@ Red
 .....
 .000.
 
+Spikes
+White
+.....
+.....
+.0.0.
+.0.0.
+00000
+
+
 (Meta-objects, no need to touch these)
 Player
 transparent
@@ -85,6 +94,7 @@ O = Target
 q = Platform
 b = Button
 l = Ladder
+s = Spikes
 
 =======
 SOUNDS
@@ -95,7 +105,7 @@ COLLISIONLAYERS
 ================
 
 Background
-Target, Ladder, Button
+Target, Ladder, Button, Spikes
 Char, CharTop, Platform, Wall, Crate
 Fell
 Player
@@ -126,7 +136,7 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 WINCONDITIONS
 ==============
 
-All Target on Crate  
+All Button on Crate  
 
 =======     
 LEVELS
@@ -140,7 +150,7 @@ LEVELS
 #....T..l...............#
 #....P..l...............#
 #.......l.@...qqqq......#
-#.......l.@.b...........#
+#.......l.@.b.....ss....#
 #...#####################
 #...#########........####
 #...#########...........#
