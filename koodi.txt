@@ -161,6 +161,9 @@ RULES
 down [ stationary Player ] [ GravityAffects no Fell | no Collidable ] -> [ Player ] [ DOWN GravityAffects Fell | ]
 [ Fell ] -> []
 
+(Disable horizontal movement if the Player is in the air)
+up [ horizontal Player ] [ No Collidable | Char ] -> [ Player ] [ | Char ]
+
 (Disable moving down if the object below is not Grabbable)
 up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 
@@ -176,7 +179,7 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [ > Crate | Crate ] -> [ > Crate | > Crate ]
 
 (Spikes)
-[ > CharFull | Spikes ] -> [ | Spikes]
+[ CharFull Spikes ] -> [ Spikes ]
 
 (Red Button and Red Doors)
 [Button Crate] [RedDoorClosed] -> [Button Crate] [RedDoorOpen] 
@@ -210,7 +213,6 @@ LEVELS
 
 MESSAGE jaa.
 
-
 ########################################
 #a.....................................#
 #......................................#
@@ -237,6 +239,5 @@ MESSAGE jaa.
 #..l..............*l.....l..*....qqqqqq#
 #nbl....ssss....#*****ss.l..*..bbb.....#
 ########################################
-
 
 
