@@ -132,6 +132,9 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [ > CharFull | Crate ] -> [ > CharFull | > Crate ]
 [ > Crate | Crate ] -> [ > Crate | > Crate ]
 
+(Spikes)
+[ > CharFull | Spikes ] -> [ | Spikes]
+
 ==============
 WINCONDITIONS
 ==============
@@ -150,7 +153,7 @@ LEVELS
 #....T..l...............#
 #....P..l...............#
 #.......l.@...qqqq......#
-#.......l.@.b.....ss....#
+#...s...l.@.b.....ss....#
 #...#####################
 #...#########........####
 #...#########...........#
