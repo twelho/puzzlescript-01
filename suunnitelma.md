@@ -1,10 +1,10 @@
 # Sunnitelma
 
-2D-platformeri, jossa gravitaatio
-Tavoite: Kaikki laatikot nappuloilla, joka avaa oven ulos tasolta pelaajalle
+2D-puzzleplatformeri, jossa gravitaatio
+Tavoite: Pääse lipulle ja seuraavaan tasoon laatikoita työntäen. 
 
 Mekaniikka:
-- Pelaaja pystyy hyppäämään 1 ruudun
+- Pelaaja ei pysty hyppäämään
 - Laatikoita voi työntää, ne putoaa aina
 - Vain laatikoita voi kuljettaa portaaleissa
 - Tikkaita voi kiivetä vain ilman laatikkoa
@@ -15,7 +15,7 @@ Mekaniikka:
 Objektit:
 - Tikkaat
 - Portaalit - Benjamin
-- Nappula
+- Nappulat, ovet
 - Pelaaja (kahden ruudun korkuinen) - Dennis
 - Laatikko (yksi ruutu)
 - Platformit
@@ -23,3 +23,10 @@ Objektit:
 
 Tasot:
 - Tasoja: 3
+
+Lisäehdotukset:
+- Pyörivät tynnyrit
+- Viholliset
+- Action nappulalle käyttötarkoitus?
+
+
