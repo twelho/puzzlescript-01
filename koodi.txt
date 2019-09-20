@@ -190,7 +190,7 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [ > Crate | Crate ] -> [ > Crate | > Crate ]
 
 (Spikes)
-[ CharFull Spikes ] -> [ Spikes ]
+[ CharFull Spikes ] -> [ Spikes ] message "You step on spikes."
 
 (Red Button and Red Doors)
 [Button Crate] [RedDoorClosed] -> [Button Crate] [RedDoorOpen] 
@@ -227,7 +227,7 @@ LEVELS
 #...#########...........#
 #########################
 
-MESSAGE jaa.
+MESSAGE Level 2
 
 ########################################
 #a.....................................#
@@ -255,4 +255,8 @@ MESSAGE jaa.
 #..l..............*l.....l..*....qqqqqq#
 #nbl....ssss....#*****ss.l..*..bbb.....#
 ########################################
+
+message Level 3
+
+
 
