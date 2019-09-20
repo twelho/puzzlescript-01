@@ -196,6 +196,11 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [Button Crate] [RedDoorClosed] -> [Button Crate] [RedDoorOpen] 
 [Button no Crate] [RedDoorOpen] -> [Button no Crate] [RedDoorClosed] 
 
+(Falling box kills the player)
+DOWN [Crate | CharTop] -> [Crate | ] message "You crushed to the death."
+DOWN [Crate | Char] -> [Crate | ] restart
+
+
 ==============
 WINCONDITIONS
 ==============
