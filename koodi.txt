@@ -26,10 +26,21 @@ BROWN darkbrown
 11111
 
 CharTop
-Yellow
+#4caf50 Black
+.101.
+.101.
+.000.
+..0..
+00000
 
 Char
-Blue
+#4caf50 #d81b60
+0.0.0
+0.0.0
+.111.
+.1.1.
+.0.0.
+
 
 Crate 
 Brown darkbrown
@@ -239,5 +250,4 @@ MESSAGE jaa.
 #..l..............*l.....l..*....qqqqqq#
 #nbl....ssss....#*****ss.l..*..bbb.....#
 ########################################
-
 
