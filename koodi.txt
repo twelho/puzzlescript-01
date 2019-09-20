@@ -6,7 +6,6 @@ homepage www.puzzlescript.net
 realtime_interval 0.1
 throttle_movement
 noaction
-
 ========
 OBJECTS
 ========
@@ -127,10 +126,7 @@ Blue White
 1....
 1....
 
-Spikes2
-transparent
-
-CharTemp
+die
 transparent
 =======
 LEGEND
@@ -147,8 +143,6 @@ a = Player
 T = CharTop
 P = Char
 * = Crate
-@ = Crate and Target
-O = Target
 q = Platform
 b = Button
 l = Ladder
@@ -169,7 +163,7 @@ COLLISIONLAYERS
 ================
 
 Background
-RedDoorFrame, Spikes2, CharTemp
+RedDoorFrame, die
 Target, Ladder, Button, RedDoorOpen, Spikes, GoalFlag, Teleport1, Teleport2
 Char, CharTop, Platform, Wall, Crate, RedDoorClosed
 Fell
@@ -201,10 +195,9 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [ > Crate | Crate ] -> [ > Crate | > Crate ]
 
 (Spikes)
-
-[ CharFull Spikes2 ] -> restart
+[die] -> restart
 [ CharFull Spikes ] -> message You step on spikes.
-[ CharFull Spikes ] -> [CharFull Spikes2] (tempspikes jotta message näkyy ennen restart)
+[ CharFull Spikes ] -> [CharFull die] (die, jotta message näkyy ennen restart)
 
 
 
@@ -215,8 +208,8 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [Button Crate] [RedDoorFrame] -> [Button Crate] [RedDoorOpen] sfx0 (jos ovea ei äsken laitettu kiinni, avaa ovi ja soita ääniefekti)
 
 (Falling box kills the player)
-DOWN [Crate | CharTemp] ->  restart
-DOWN [Crate | CharTop] -> [Crate | CharTemp ] message You were crushed.
+[die] ->  restart
+DOWN [Crate | CharTop] -> [Crate | die ] message You were crushed.
 
 
 
@@ -230,6 +223,29 @@ Any CharFull on GoalFlag
 LEVELS
 =======
 
+message level 1
+message Press the button and reach the flag to win!
+
+
+#########################
+#a......................#
+#.......................#
+#.......................#
+#.......................#
+#..............g........#
+#..............#l.......#
+#.............##l.......#
+#............##.l#......#
+#.......*...##..l##.....#
+#...t..lq....r..lr......#
+#...p..l.b...r..lr......#
+#########################
+#########################
+#########################
+
+
+MESSAGE Well that was easy.. Now there are more buttons though(Level 2)
+
 #########################
 #a......................#
 #.....s.....*.........*.#
@@ -240,42 +256,41 @@ LEVELS
 #...l...l.*.......l.r...#
 #.b*l...l.*.b.....l.r.g.#
 ###########.#############
-#...#######b#........####
-#...#########...........#
-#...#########...........#
-#...#########...........#
+###########b#############
+#########################
+#########################
+#########################
 #########################
 
-MESSAGE Level 2
+message okay.. this one is a bit more tricky (Level 3)
 
 ########################################
-#a.....................................#
-#......................................#
-#....**...qqqqqql............###..###..#
-#..l####........l......................#
-#..l.r.#........l.............#....#...#
-#..l.rg#........l......................#
-#..lqqq#........l...........##########.#
-#..l............l...........#........#.#
-#..l............l...........#........#.#
-#..l..........*.l...n........#......#..#
-#..l....*....qqqqlqqqq.......#......#..#
-#..l....*........l............#....#...#
-#..l.T..*........l.............####....#
-#..l.P..*........l.....................#
-#..l....*........l.....................#
-#..l....*........l.....................#
-#..lqqqqq........l.....................#
-#..l............#########l.............#
-#..l............#.....#..l.............#
-#..l........b...#...*....l.............#
-#..lqqqqq..qqq..#..lq....l.............#
-#..l...............l..q..l..*..........#
-#..l..............*l.....l..*....qqqqqq#
-#nbl....ssss....#*****ss.l..*..bbb.....#
+#a...........#.........................#
+#............r.........................#
+#.....g......r.........................#
+#....qqqlqqqqqql.......................#
+#.......l......l.......................#
+#......*l......l.......................#
+#......*l......l.......................#
+#......*l......l.......................#
+#..lqqqqq......l......lqq..............#
+#..l.*.........l......l................#
+#..l.**........l......l*...............#
+#..lqqqqq....qqqqqqqlqqqqqqq...........#
+#..l................l..................#
+#..l.*t.*...........l.......*.*.b.s....#
+#..l.*p.*...........l......qqqqqqqq....#
+#..l.qqqq...........l..................#
+#..l................l..................#
+#..l...........##########l.............#
+#..lq..........#......#..l.............#
+#..l...........#..*......l.............#
+#..l...*....b*....qlq....l.............#
+#.qqqlqqq..qqq.....l.....l.............#
+#....l.........#...l*.q..l.*...........#
+#b...l..ssss...#...l**ss.l.*...bbb.....#
 ########################################
 
-message Level 3
-
+message Ayyy you win :DDDDDDDD
 
 
