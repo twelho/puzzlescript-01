@@ -116,6 +116,9 @@ Red
 ...0.
 ....0
 
+RedDoorFrame
+transparent
+
 GoalFlag
 Blue White
 100..
@@ -124,6 +127,11 @@ Blue White
 1....
 1....
 
+Spikes2
+transparent
+
+CharTemp
+transparent
 =======
 LEGEND
 =======
@@ -154,11 +162,14 @@ m = Teleport2
 SOUNDS
 =======
 
+sfx0 58045703
+
 ================
 COLLISIONLAYERS
 ================
 
 Background
+RedDoorFrame, Spikes2, CharTemp
 Target, Ladder, Button, RedDoorOpen, Spikes, GoalFlag, Teleport1, Teleport2
 Char, CharTop, Platform, Wall, Crate, RedDoorClosed
 Fell
@@ -190,15 +201,23 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [ > Crate | Crate ] -> [ > Crate | > Crate ]
 
 (Spikes)
-[ CharFull Spikes ] -> [ Spikes ] message "You step on spikes."
+
+[ CharFull Spikes2 ] -> restart
+[ CharFull Spikes ] -> message You step on spikes.
+[ CharFull Spikes ] -> [CharFull Spikes2] (tempspikes jotta message näkyy ennen restart)
+
+
 
 (Red Button and Red Doors)
-[Button Crate] [RedDoorClosed] -> [Button Crate] [RedDoorOpen] 
-[Button no Crate] [RedDoorOpen] -> [Button no Crate] [RedDoorClosed] 
+[Button no Crate] [RedDoorOpen] -> [Button no Crate] [RedDoorClosed] (sulje ovi jos nappia ei painettu)
+[Button Crate] [RedDoorClosed] -> [Button Crate] [RedDoorFrame] (jos ovi on kiinni ja nappi on painettu, tee suljetusta ovesta temp door)
+[Button no Crate] [RedDoorFrame] -> [Button no Crate] [RedDoorClosed] (jos nappia ei ole painettu ja temp ovi, laita ovi takaisin kiinni)
+[Button Crate] [RedDoorFrame] -> [Button Crate] [RedDoorOpen] sfx0 (jos ovea ei äsken laitettu kiinni, avaa ovi ja soita ääniefekti)
 
 (Falling box kills the player)
-DOWN [Crate | CharTop] -> [Crate | ] message "You crushed to the death."
-DOWN [Crate | Char] -> [Crate | ] restart
+DOWN [Crate | CharTemp] ->  restart
+DOWN [Crate | CharTop] -> [Crate | CharTemp ] message You were crushed.
+
 
 
 ==============
