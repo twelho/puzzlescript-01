@@ -172,6 +172,8 @@ Player
 ======
 RULES     
 ======
+(Dying kills the player)
+[die] -> restart
 
 (On real-time ticks update gravity for all affected objects)
 down [ stationary Player ] [ GravityAffects no Fell | no Collidable ] -> [ Player ] [ DOWN GravityAffects Fell | ]
@@ -195,7 +197,6 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [ > Crate | Crate ] -> [ > Crate | > Crate ]
 
 (Spikes)
-[die] -> restart
 [ CharFull Spikes ] -> message You step on spikes.
 [ CharFull Spikes ] -> [CharFull die] (die, jotta message näkyy ennen restart)
 
@@ -208,7 +209,6 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [Button Crate] [RedDoorFrame] -> [Button Crate] [RedDoorOpen] sfx0 (jos ovea ei äsken laitettu kiinni, avaa ovi ja soita ääniefekti)
 
 (Falling box kills the player)
-[die] ->  restart
 DOWN [Crate | CharTop] -> [Crate | die ] message You were crushed.
 
 
