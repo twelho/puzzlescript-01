@@ -7,17 +7,18 @@ realtime_interval 0.1
 throttle_movement
 noaction
 noundo
+
 ========
 OBJECTS
 ========
 
-Background 
-lightblue 
+Background
+LightBlue
 
-Target 
-DarkBlue    
+Target
+DarkBlue
 
-Wall 
+Wall
 BROWN darkbrown
 11111
 10001
@@ -41,8 +42,7 @@ Char
 .1.1.
 .0.0.
 
-
-Crate 
+Crate
 Brown darkbrown
 11111
 11001
@@ -126,13 +126,6 @@ transparent
 TPBlue22
 transparent
 
-(Meta-objects, no need to touch these)
-Player
-transparent
-
-Fell
-transparent
-
 RedDoorClosed
 Red
 
@@ -177,16 +170,24 @@ Blue White
 1....
 1....
 
+(Meta-objects, no need to touch these)
+Player
+transparent
+
+Fell
+transparent
+
 die
 transparent
+
 =======
 LEGEND
 =======
 
 CharFull = Char or CharTop
-GravityAffects = Char or Crate
-Collidable = Platform or Wall or Crate or CharFull or Ladder or RedDoorClosed or RedDoorOpen2
+Collidable = Platform or Wall or Crate or CharFull or RedDoorClosed or RedDoorOpen2
 Grabbable = Ladder
+CollidableOrGrabbable = Collidable or Grabbable
 Teleports = TPRed1 or TPRed2 or TPRed12 or TPRed22 or TPBLue1 or TPBLue2 or TPBLue12 or TPBlue22
 
 a = Player
@@ -216,31 +217,31 @@ sfx1 19243508 (Portal ?)
 sfx2 92167108 (Death)
 sfx3 24436300 (Win)
 sfx4 12791107 (move)
-
-
+sfx5 15535107 (Button)
 
 ================
 COLLISIONLAYERS
 ================
 
-Background 
-RedDoorFrame, RedDoorFrame2, die  (Invisible flags in background) 
-Target, Ladder, Button, RedDoorOpen, RedDoorClosed2, Spikes, GoalFlag, GoalFlag2, Teleports (Background objeckts)
+Background
+RedDoorFrame, RedDoorFrame2, die (Invisible flags in background)
+Target, Ladder, Button, RedDoorOpen, RedDoorClosed2, Spikes, GoalFlag, GoalFlag2, Teleports (Background objects)
 Char, CharTop, Platform, Wall, Crate, RedDoorClosed, RedDoorOpen2 (Collidable objects)
 Fell
 Player
 
 ======
-RULES     
+RULES
 ======
-[die] -> restart
+[ die ] -> restart
 
 (On real-time ticks update gravity for all affected objects)
-down [ stationary Player ] [ GravityAffects no Fell | no Collidable ] -> [ Player ] [ DOWN GravityAffects Fell | ]
+down [ stationary Player ] [ Char no Fell | no CollidableOrGrabbable ] -> [ Player ] [ DOWN Char Fell | ]
+down [ stationary Player ] [ Crate no Fell | no Collidable ] -> [ Player ] [ DOWN Crate Fell | ]
 [ Fell ] -> []
 
 (Disable horizontal movement if the Player is in the air)
-up [ horizontal Player ] [ No Collidable | Char ] -> [ Player ] [ | Char ]
+up [ horizontal Player ] [ No CollidableOrGrabbable | Char ] -> [ Player ] [ | Char ]
 
 (Disable moving down if the object below is not Grabbable)
 up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
@@ -257,32 +258,25 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [ > Crate | Crate ] -> [ > Crate | > Crate ]
 
 (Spikes)
-[ CharFull Spikes ] -> sfx2 message You step on spikes.
-[ CharFull Spikes ] -> [CharFull die] (die, jotta message näkyy ennen restart)
-
+[ CharFull Spikes ] -> [ CharFull die ] sfx2 message You stepped on spikes.
 
 (Red Button and Red Doors)
-[Button no Crate] [RedDoorOpen] -> [Button no Crate] [RedDoorClosed] (sulje ovi jos nappia ei painettu)
-[Button Crate] [RedDoorClosed] -> [Button Crate] [RedDoorFrame] (jos ovi on kiinni ja nappi on painettu, tee suljetusta ovesta temp door)
-[Button no Crate] [RedDoorFrame] -> [Button no Crate] [RedDoorClosed] (jos nappia ei ole painettu ja temp ovi, laita ovi takaisin kiinni)
-[Button Crate] [RedDoorFrame] -> [Button Crate] [RedDoorOpen] sfx0 (jos ovea ei äsken laitettu kiinni, avaa ovi ja soita ääniefekti)
+[ Button no Crate ] [ RedDoorOpen ] -> [ Button no Crate ] [ RedDoorClosed ] (sulje ovi jos nappia ei painettu)
+[ Button Crate ] [ RedDoorClosed ] -> [ Button Crate ] [ RedDoorFrame ] (jos ovi on kiinni ja nappi on painettu, tee suljetusta ovesta temp door)
+[ Button no Crate ] [ RedDoorFrame ] -> [ Button no Crate ] [ RedDoorClosed ] (jos nappia ei ole painettu ja temp ovi, laita ovi takaisin kiinni)
+[ Button Crate ] [ RedDoorFrame ] -> [ Button Crate ] [ RedDoorOpen ] sfx0 (jos ovea ei äsken laitettu kiinni, avaa ovi ja soita ääniefekti)
 
 (Red Button and Red Doors Reversed)
-[Button no Crate] [RedDoorOpen2] -> [Button no Crate] [RedDoorClosed2] 
-[Button Crate] [RedDoorClosed2] -> [Button Crate] [RedDoorFrame2]  
-[Button no Crate] [RedDoorFrame2] -> [Button no Crate] [RedDoorClosed2]  
-[Button Crate] [RedDoorFrame2] -> [Button Crate] [RedDoorOpen2]  
+[ Button no Crate ] [ RedDoorOpen2 ] -> [ Button no Crate ] [ RedDoorClosed2 ]
+[ Button Crate ] [ RedDoorClosed2 ] -> [ Button Crate ] [ RedDoorFrame2 ]
+[ Button no Crate ] [ RedDoorFrame2 ] -> [ Button no Crate ] [ RedDoorClosed2 ]
+[ Button Crate ] [ RedDoorFrame2 ] -> [ Button Crate ] [ RedDoorOpen2 ]
 
+(Play sound effect when Button is pressed)
+[ > Crate | Button ] -> sfx5
 
-
-
-
-
-
-
-(Falling box kills the player)
-DOWN [Crate | CharTop] -> [Crate | die ] sfx2 message You were crushed. 
-
+(Falling Create kills the Character)
+DOWN [ Crate | CharTop ] -> [ Crate | die ] sfx2 message You were crushed.
 
 (TELEPORTS. Only two teleports of the same color will work)
 (Red teleports)
@@ -300,20 +294,19 @@ DOWN [Crate | CharTop] -> [Crate | die ] sfx2 message You were crushed.
 [ TPBlue22 no crate ] -> [ TPBLue2 ]
 
 (Winning plays sound)
-[ CharFull GoalFlag ] -> sfx3 [ CharFull GoalFlag2 ] 
+[ CharFull GoalFlag ] -> sfx3 [ CharFull GoalFlag2 ]
 ==============
 WINCONDITIONS
 ==============
 
 Any CharFull on GoalFlag2
 
-=======     
+=======
 LEVELS
 =======
 
-message level 1
-message Press the button and reach the flag to win!
-
+message Level 1
+message Put a crate on the button and reach the flag to win!
 
 #########################
 #a......................#
@@ -331,8 +324,7 @@ message Press the button and reach the flag to win!
 #########################
 #########################
 
-
-MESSAGE Well that was easy.. Now there are more buttons though(Level 2)
+MESSAGE Well that was easy... now there are more buttons though (Level 2)
 
 #########################
 #a......................#
@@ -350,7 +342,7 @@ MESSAGE Well that was easy.. Now there are more buttons though(Level 2)
 #########################
 #########################
 
-message okay.. this one is a bit more tricky (Level 3)
+message Okay... this one is a bit more tricky (Level 3)
 
 ########################################
 #a...........#.........................#
