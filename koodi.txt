@@ -325,7 +325,7 @@ message Put a crate on the button and reach the flag to win!
 #########################
 #########################
 
-MESSAGE Well that was easy... now there are more buttons though (Level 2)
+MESSAGE Well that was easy. Now there are more buttons though (Level 2)
 
 #########################
 #a......................#
@@ -343,7 +343,7 @@ MESSAGE Well that was easy... now there are more buttons though (Level 2)
 #########################
 #########################
 
-message Let em introduce you... TELEPORTS! (Level 3)
+message Nice! Let me introduce to you... TELEPORTS! (Level 3)
 
 ####################
 #a.x...............#
@@ -386,31 +386,38 @@ message Okay... this one is a bit more tricky (Level 4)
 #b...l..ssss...#...l**ss.l.*...bbb.....#
 ########################################
 
-message Ayyy you win :DDDDDDDD
+message Time for a real challenge! (Level 5)
 
 ########################
-#a.....................#
-#......................#
-#......................#
-#......................#
-#......................#
-#......................#
-#......................#
-#......................#
-#......................#
-#lrrrrrl...............#
-#l.....l...............#
-#l.....l..*............#
-#lt..lrrrrrrs..........#
-#lp*.l.................#
-#rrrrl......ä.y........#
-#....l.................#
-#....l.................#
+#a.#......#............#
+#g.***......******.....#
+#l.q#qqqqlqqqqqqqqqlqq.#
+#l....#..l.........l...#
+#l......*l.........l.*.#
+#l.#l...*l.........lqqq#
+#l.#l...*llql......l...#
+#l.##.#.*#l.l.....*l...#
+#l.#....####l.....*l*l.#
+##.#.sss#..#l.....*l*l.#
+#..######..###..######l#
+#.......######..#....#l#
+#............####tl*.#l#
+#lrrrrrl........#pl*.#l#
+#l.....l........#lqq.#l#
+#l.....l..*.....#l...#l#
+#l...lrrrrrrs...#l....l#
+#l.*.l..........#l*.*.l#
+#rrrrl......ä.y.#ll.*.##
+#....l..........#####.##
+#....l..............####
 #....l.................#
 #..ö.l.................#
-#...*l..*..leleee......#
+#...*l..*..lelee.......#
 #.rrrrrrr..lel.........#
-#.x........lel......g..#
-#eeeeeeeeeee.l.rrrrrrrr#
+#.x........lel...g.....#
+#eeeeeeeeeee.l.rrrr....#
 #ssssssssss.bl.........#
 ########################
+
+message Congratulations champion! You won. Thanks for playing :D
+
