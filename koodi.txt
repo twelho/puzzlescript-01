@@ -414,7 +414,7 @@ message Time for a real challenge! (Level 5)
 #..ö.l.................#
 #...*l..*..lelee.......#
 #.rrrrrrr..lel.........#
-#.x........lel...g.....#
+#.x........lel....g....#
 #eeeeeeeeeee.l.rrrr....#
 #ssssssssss.bl.........#
 ########################
