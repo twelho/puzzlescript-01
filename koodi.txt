@@ -342,7 +342,7 @@ MESSAGE Well that was easy... now there are more buttons though (Level 2)
 #########################
 #########################
 
-message Okay... this one is a bit more tricky (Level 3)
+message Okay... Time for portals (Level 3)
 
 ########################################
 #a...........#.........................#
@@ -371,7 +371,7 @@ message Okay... this one is a bit more tricky (Level 3)
 #b...l..ssss...#...l**ss.l.*...bbb.....#
 ########################################
 
-message Ayyy you win :DDDDDDDD
+message This one is a bit harder. (Level 4) 
 
 ########################
 #a.....................#
@@ -399,3 +399,5 @@ message Ayyy you win :DDDDDDDD
 #eeeeeeeeeee.l.rrrrrrrr#
 #ssssssssss.bl.........#
 ########################
+
+message Congratulations, you won the game :D Thanks for playing!
