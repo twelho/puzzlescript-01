@@ -394,9 +394,9 @@ message Time for a real challenge! (Level 5)
 #l.q#qqqqlqqqqqqqqqlqq.#
 #l....#..l.........l...#
 #l......*l.........l.*.#
-#l.#l...*l.ql......lqqq#
-#l.#l...*ll.l......l...#
-#l.##.#.*#l.l.....*l...#
+#l.#l...*l.#l......lqqq#
+#l.#l...*ll#l......l...#
+#l.##.#.*#l#l.....*l...#
 #l.#....####l.....*l*l.#
 ##.#.sss#..#l.....*l*l.#
 #..######..###..######l#
