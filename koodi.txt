@@ -1,11 +1,12 @@
-title My Game
-author My Name Here
+title Alien wants Flag
+author Sebastian, Sami, Dennis, Benjamin
 homepage www.puzzlescript.net
 
 (realtime_interval specifies the "speed" of gravity (seconds per block of movement))
 realtime_interval 0.1
 throttle_movement
 noaction
+noundo
 ========
 OBJECTS
 ========
@@ -81,7 +82,29 @@ Black
 .0.0.
 00000
 
-Teleport1
+TPRed1
+darkred Red
+.000.
+01110
+01110
+01110
+.000.
+
+TPRed2
+darkred Red
+.000.
+01110
+01110
+01110
+.000.
+
+TPRed12
+transparent
+
+TPRed22
+transparent
+
+TPBLue1
 darkblue Blue
 .000.
 01110
@@ -89,13 +112,19 @@ darkblue Blue
 01110
 .000.
 
-Teleport2
-darkred Red
+TPBLue2
+darkblue Blue
 .000.
 01110
 01110
 01110
 .000.
+
+TPBLue12
+transparent
+
+TPBlue22
+transparent
 
 (Meta-objects, no need to touch these)
 Player
@@ -126,6 +155,14 @@ Blue White
 1....
 1....
 
+GoalFlag2
+Blue White
+100..
+10000
+100..
+1....
+1....
+
 die
 transparent
 =======
@@ -136,6 +173,7 @@ CharFull = Char or CharTop
 GravityAffects = Char or Crate
 Collidable = Platform or Wall or Crate or CharFull or Ladder
 Grabbable = Ladder
+Teleports = TPRed1 or TPRed2 or TPRed12 or TPRed22 or TPBLue1 or TPBLue2 or TPBLue12 or TPBlue22
 
 a = Player
 . = Background
@@ -149,29 +187,38 @@ l = Ladder
 s = Spikes
 r = RedDoorClosed
 g = GoalFlag
-n = Teleport1
-m = Teleport2
+ä = TPRed1
+ö = TPRed2
+x = TPBLue1
+y = TPBLue2
 
 =======
 SOUNDS
 =======
 
-sfx0 58045703
+sfx0 31271903 (Door)
+sfx1 19243508 (Portal ?)
+sfx2 92167108 (Death)
+sfx3 24436300 (Win)
+sfx4 12791107 (move)
+
+
 
 ================
 COLLISIONLAYERS
 ================
 
-Background
-RedDoorFrame, die
-Target, Ladder, Button, RedDoorOpen, Spikes, GoalFlag, Teleport1, Teleport2
-Char, CharTop, Platform, Wall, Crate, RedDoorClosed
+Background 
+RedDoorFrame, die (Invisible flags in background)
+Target, Ladder, Button, RedDoorOpen, Spikes, GoalFlag, GoalFlag2, Teleports (Background objeckts)
+Char, CharTop, Platform, Wall, Crate, RedDoorClosed (Collidable objects)
 Fell
 Player
 
 ======
 RULES     
 ======
+[die] -> restart
 
 (On real-time ticks update gravity for all affected objects)
 down [ stationary Player ] [ GravityAffects no Fell | no Collidable ] -> [ Player ] [ DOWN GravityAffects Fell | ]
@@ -188,17 +235,15 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 
 (Transfer player movement to the Character, perform rigid animation for the top)
 [ moving Player ] [ Char ] -> [ Player ] [ moving Char ]
-+ rigid [ moving Char | CharTop ] -> [ moving Char | moving CharTop ]
++ rigid [ moving Char | CharTop ] -> [ moving Char | moving CharTop ] sfx4
 
 (Allow the Character and other Crates to push Crates)
 [ > CharFull | Crate ] -> [ > CharFull | > Crate ]
 [ > Crate | Crate ] -> [ > Crate | > Crate ]
 
 (Spikes)
-[die] -> restart
-[ CharFull Spikes ] -> message You step on spikes.
+[ CharFull Spikes ] -> sfx2 message You step on spikes.
 [ CharFull Spikes ] -> [CharFull die] (die, jotta message näkyy ennen restart)
-
 
 
 (Red Button and Red Doors)
@@ -208,17 +253,31 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [Button Crate] [RedDoorFrame] -> [Button Crate] [RedDoorOpen] sfx0 (jos ovea ei äsken laitettu kiinni, avaa ovi ja soita ääniefekti)
 
 (Falling box kills the player)
-[die] ->  restart
-DOWN [Crate | CharTop] -> [Crate | die ] message You were crushed.
+DOWN [Crate | CharTop] -> [Crate | die ] sfx2 message You were crushed. 
 
-(Teleports. Kun haluaa uuden, pitää ylempänä tehdä uusi Teleport-pari ja sitten kopoida sille alla oleva rivi ja vaihtaa oikeat numerot)
-[ Teleport1 Crate ] [ Teleport2 ] -> [ Teleport1 ] [ Teleport2 Crate ] (Teleport1 -> Teleport2)
 
+(TELEPORTS. Only two teleports of the same color will work)
+(Red teleports)
+[ TPRed1 Crate ] [ TPRed2 no Crate no CharFull ] -> [ TPRed1 ] [ TPRed22 Crate ] sfx1 (TP1 - TP2)
+[ TPRed2 Crate ] [ TPRed1 no Crate no CharFull ] -> [ TPRed2 ] [ TPRed12 Crate ] sfx1 (TP2 - TP1)
+(Blue Teleports)
+[ TPBLue1 Crate ] [ TPBLue2 no Crate no CharFull ] -> [ TPBLue1 ] [ TPBlue22 Crate ] (TP1 - TP2)
+[ TPBLue2 Crate ] [ TPBLue1 no Crate no CharFull ] -> [ TPBLue2 ] [ TPBLue12 Crate ] (TP2 - TP1)
+
+(Resetoi tp takaisin toimivaksi jos laatikko on siirretty pois tp edestä)
+[ TPRed12 no Crate ] -> [ TPRed1 ]
+[ TPRed22 no crate ] -> [ TPRed2 ]
+(sama sinisille)
+[ TPBLue12 no Crate ] -> [ TPBLue1 ]
+[ TPBlue22 no crate ] -> [ TPBLue2 ]
+
+(Winning plays sound)
+[ CharFull GoalFlag ] -> sfx3 [ CharFull GoalFlag2 ] 
 ==============
 WINCONDITIONS
 ==============
 
-Any CharFull on GoalFlag
+Any CharFull on GoalFlag2
 
 =======     
 LEVELS
@@ -273,23 +332,23 @@ message okay.. this one is a bit more tricky (Level 3)
 #.......l......l.......................#
 #......*l......l.......................#
 #......*l......l.......................#
-#......*l......l.......................#
+#....*x*l...ä..l.......................#
 #..lqqqqq......l......lqq..............#
 #..l.*.........l......l................#
-#..l.**........l......l*...............#
-#..lqqqqq....qqqqqqqlqqqqqqq...........#
+#..l.**........l......l*..ö............#
+#..lqqqqq.....qqqqqqlqqqqqqq...........#
 #..l................l..................#
-#..l.*..*...........l.......*.*.b.s....#
-#..l.*..*...........l......qqqqqqqq....#
-#..l.qqqq...........l..................#
+#..l..t.*...........l.......*.*.b.s....#
+#..l*.p.*...........l......qqqqqqqq....#
+#..lqqqqq...........l..................#
 #..l................l..................#
 #..l...........##########l.............#
-#..lq..........#......#..l.............#
-#..l..t........#..*......l.............#
-#..l..p*n...b*....qlq....l.............#
+#..l..y........#......#..l.............#
+#..l...........#..*......l.............#
+#..l...*....b*....qlq....l.............#
 #.qqqlqqq..qqq.....l.....l.............#
 #....l.........#...l*.q..l.*...........#
-#b.m.l..ssss...#...l**ss.l.*...bbb.....#
+#b...l..ssss...#...l**ss.l.*...bbb.....#
 ########################################
 
 message Ayyy you win :DDDDDDDD
