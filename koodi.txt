@@ -147,6 +147,20 @@ Red
 RedDoorFrame
 transparent
 
+RedDoorClosed2
+Red
+0....
+.0...
+..0..
+...0.
+....0
+
+RedDoorOpen2
+Red
+
+RedDoorFrame2
+transparent
+
 GoalFlag
 Blue White
 100..
@@ -171,7 +185,7 @@ LEGEND
 
 CharFull = Char or CharTop
 GravityAffects = Char or Crate
-Collidable = Platform or Wall or Crate or CharFull or Ladder
+Collidable = Platform or Wall or Crate or CharFull or Ladder or RedDoorClosed or RedDoorOpen2
 Grabbable = Ladder
 Teleports = TPRed1 or TPRed2 or TPRed12 or TPRed22 or TPBLue1 or TPBLue2 or TPBLue12 or TPBlue22
 
@@ -186,6 +200,7 @@ b = Button
 l = Ladder
 s = Spikes
 r = RedDoorClosed
+e = RedDoorClosed2
 g = GoalFlag
 ä = TPRed1
 ö = TPRed2
@@ -209,9 +224,9 @@ COLLISIONLAYERS
 ================
 
 Background 
-RedDoorFrame, die (Invisible flags in background)
-Target, Ladder, Button, RedDoorOpen, Spikes, GoalFlag, GoalFlag2, Teleports (Background objeckts)
-Char, CharTop, Platform, Wall, Crate, RedDoorClosed (Collidable objects)
+RedDoorFrame, RedDoorFrame2, die  (Invisible flags in background) 
+Target, Ladder, Button, RedDoorOpen, RedDoorClosed2, Spikes, GoalFlag, GoalFlag2, Teleports (Background objeckts)
+Char, CharTop, Platform, Wall, Crate, RedDoorClosed, RedDoorOpen2 (Collidable objects)
 Fell
 Player
 
@@ -252,6 +267,19 @@ up [ DOWN Player ] [ No Grabbable | Char ] -> [ Player ] [ | Char ]
 [Button no Crate] [RedDoorFrame] -> [Button no Crate] [RedDoorClosed] (jos nappia ei ole painettu ja temp ovi, laita ovi takaisin kiinni)
 [Button Crate] [RedDoorFrame] -> [Button Crate] [RedDoorOpen] sfx0 (jos ovea ei äsken laitettu kiinni, avaa ovi ja soita ääniefekti)
 
+(Red Button and Red Doors Reversed)
+[Button no Crate] [RedDoorOpen2] -> [Button no Crate] [RedDoorClosed2] 
+[Button Crate] [RedDoorClosed2] -> [Button Crate] [RedDoorFrame2]  
+[Button no Crate] [RedDoorFrame2] -> [Button no Crate] [RedDoorClosed2]  
+[Button Crate] [RedDoorFrame2] -> [Button Crate] [RedDoorOpen2]  
+
+
+
+
+
+
+
+
 (Falling box kills the player)
 DOWN [Crate | CharTop] -> [Crate | die ] sfx2 message You were crushed. 
 
@@ -261,8 +289,8 @@ DOWN [Crate | CharTop] -> [Crate | die ] sfx2 message You were crushed.
 [ TPRed1 Crate ] [ TPRed2 no Crate no CharFull ] -> [ TPRed1 ] [ TPRed22 Crate ] sfx1 (TP1 - TP2)
 [ TPRed2 Crate ] [ TPRed1 no Crate no CharFull ] -> [ TPRed2 ] [ TPRed12 Crate ] sfx1 (TP2 - TP1)
 (Blue Teleports)
-[ TPBLue1 Crate ] [ TPBLue2 no Crate no CharFull ] -> [ TPBLue1 ] [ TPBlue22 Crate ] (TP1 - TP2)
-[ TPBLue2 Crate ] [ TPBLue1 no Crate no CharFull ] -> [ TPBLue2 ] [ TPBLue12 Crate ] (TP2 - TP1)
+[ TPBLue1 Crate ] [ TPBLue2 no Crate no CharFull ] -> [ TPBLue1 ] [ TPBlue22 Crate ] sfx1 (TP1 - TP2)
+[ TPBLue2 Crate ] [ TPBLue1 no Crate no CharFull ] -> [ TPBLue2 ] [ TPBLue12 Crate ] sfx1 (TP2 - TP1)
 
 (Resetoi tp takaisin toimivaksi jos laatikko on siirretty pois tp edestä)
 [ TPRed12 no Crate ] -> [ TPRed1 ]
@@ -352,3 +380,30 @@ message okay.. this one is a bit more tricky (Level 3)
 ########################################
 
 message Ayyy you win :DDDDDDDD
+
+########################
+#a.....................#
+#......................#
+#......................#
+#......................#
+#......................#
+#......................#
+#......................#
+#......................#
+#......................#
+#lrrrrrl...............#
+#l.....l...............#
+#l.....l..*............#
+#lt..lrrrrrrs..........#
+#lp*.l.................#
+#rrrrl......ä.y........#
+#....l.................#
+#....l.................#
+#....l.................#
+#..ö.l.................#
+#...*l..*..leleee......#
+#.rrrrrrr..lel.........#
+#.x........lel......g..#
+#eeeeeeeeeee.l.rrrrrrrr#
+#ssssssssss.bl.........#
+########################
